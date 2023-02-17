@@ -17,8 +17,7 @@ exports.register = async (email, password, repass, description) => {
     throw new Error('Password missmatch!');
   }
 
-
-  const existingUser = await User.findOne({ email });
+  const existingUser = await this.findByEmail({ email });
 
   if (existingUser) {
     throw new Error('Email exists!');

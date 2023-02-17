@@ -10,8 +10,10 @@ router.get('/register', (req, res) => {
 
 router.post('/register', async (req, res) => {
     const { email, password, repass, description } = req.body;
+
     try{
-     const token = await authService.register( email, password, repass, description);
+    const token = await authService.register( email, password, repass, description);
+    
      res.cookie('auth', token);
      res.redirect('/');
      
@@ -29,10 +31,13 @@ router.get('/login', (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
+
     try {
-        const token = await authService.login(email, password);
-        res.cookie('auth', token);
-        res.redirect('/');
+       
+            const token = await authService.login(email, password);
+            res.cookie('auth', token);
+            res.redirect('/');
+      
 
     } catch (error) {
         return res.status(404).render('auth/login', { error: getErrorMessage(error) });
