@@ -10,7 +10,7 @@ exports.findByEmail = (email) => User.findOne({ email });
 
 exports.register = async (email, password, repass, description) => {
  
-  if(password.lengt < 5){
+  if(password.length < 5){
     throw new Error('pasword must be at least 5 characters long!');
   }
   if (password !== repass) {
